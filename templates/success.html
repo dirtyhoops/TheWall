@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>The Wall</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
+    
+    
+    <!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css">    -->
+    
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome {{session['firstName']}} </h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/logout", method="post">
+                            <button type="submit" class="btn btn-dark">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="messagewalldiv">
+            <div class="row">
+                <div class="col-med-12 col-sm-12" centered>
+                    <div class="form-group">
+                        <form action="/post", method="post">
+                            <label for="message">Post a message:</label>
+                            <textarea class="form-control" name="message"></textarea>
+                            <div class="rightalign">
+                                <button id ="postmessagebutton" type="submit" class="btn btn-dark btn-sm">Post a message!</button>
+                            </div>
+                        </form>
+                    </div> 
+                </div>
+            </div>        <!-- end of row -->
+
+            <div class="row">
+                <div class="col-med-12 col-sm-12" centered>
+                    {% for row in all_messages %}
+                    <div class="messagesdiv">
+                        <div class="messagesmargin">
+                            <p>{{row.first_name}} {{row.last_name}} - {{row['created_at'].strftime('%B %dth %Y')}}</p>
+                            <p class="messagesfont">{{row.message}}</p>
+                        </div>
+                        {% for x in all_comments %}
+                            {% if row.id == x.message_id:%}
+                                <div class="commentsdiv">
+                                    <div class="commentsmargin">
+                                        <p>{{x.first_name}} {{x.last_name}} - {{x['created_at'].strftime('%B %dth %Y')}}</p>
+                                        <p class="messagesfont">{{x.comment}}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="messagescomment">
+                            <div class="form-group">
+                                <form action="/comment", method="post">
+                                    <input type="hidden" name="messageID" value = {{row.id}}>
+                                    <label for="comment">Post a Comment:</label>
+                                    <textarea class="form-control" name="comment"></textarea>
+                                    <div class="rightalign">
+                                        <button id ="postcommentbutton" type="submit" class="btn btn-dark btn-sm">Post a comment!</button>
+                                    </div>
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>      <!-- end of message wall -->
+    </div>          <!-- end of container -->
+</body>
+</html>

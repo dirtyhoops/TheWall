@@ -1,0 +1,61 @@
+.container {
+    width: 800px;
+    background-color: rgba(128, 128, 128, 0.932);
+    border: 3px solid black;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.registerform, .loginform {
+    margin: 20px 5px;
+}
+
+.registerform h3, .loginform h3{
+    text-align: center;
+}
+
+.header {
+    height: 80px;
+    padding: 30px 2px;
+}
+
+.messagewalldiv {
+    width: 97%;
+    margin: 5px 15px;
+
+}
+
+.messagesdiv {
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid rgba(8, 197, 204, 0.808);
+    background-color: rgba(74, 198, 202, 0.993);
+}
+
+.commentsdiv {
+    margin: 2px 30px;
+    border-radius: 10px;
+    border: 2px solid rgba(6, 79, 82, 0.452);
+    background-color: rgba(4, 235, 243, 0.993);
+}
+
+.rightalign {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.messagesmargin {
+    margin: 2px 20px;
+}
+
+.messagescomment {
+    margin: 5px 30px;
+}
+
+.commentsmargin {
+    margin: 2px 10px;
+}
